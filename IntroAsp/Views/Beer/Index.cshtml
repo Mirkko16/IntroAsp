@@ -11,10 +11,11 @@
         <tr>
             <th>
                 Nombre
-            </th>
+            </th>            
             <th>
                 Marca
             </th>
+            <th></th>
             <th></th>
         </tr>
     </thead>
@@ -26,11 +27,19 @@
                 <td>
                     @Html.DisplayFor(m=>beer.Name)
                 </td>
+               
                 <td>
                     @Html.DisplayFor(m=>beer.Brand.Name)
                 </td>
                 <td>
-
+                    <button type="submit" class="btn btn-warning">
+                        <a class="no-underline" asp-action="Edit" asp-route-id="@beer.BeerId" asp-route-name="@beer.Name" asp-route-brandId="@beer.BrandId">Editar</a>
+                    </button>
+                </td>
+                <td>
+                    <form asp-action="Delete" asp-route-id="@beer.BeerId" onsubmit="return confirm('¿Está seguro de que desea eliminar esta cerveza?');">
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </form>
                 </td>
             </tr>
         }

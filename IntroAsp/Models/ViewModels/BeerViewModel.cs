@@ -10,6 +10,7 @@ namespace IntroAsp.Models.ViewModels
 
         [Required]
         [Display(Name ="Marca")]
-        public string BrandId { get; set; }
+        public int BrandId { get; set; }
+        public int BeerId { get;  set; }
     }
 }
