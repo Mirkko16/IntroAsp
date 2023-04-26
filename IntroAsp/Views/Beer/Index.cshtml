@@ -32,9 +32,7 @@
                     @Html.DisplayFor(m=>beer.Brand.Name)
                 </td>
                 <td>
-                    <button type="submit" class="btn btn-warning">
-                        <a class="no-underline" asp-action="Edit" asp-route-id="@beer.BeerId" asp-route-name="@beer.Name" asp-route-brandId="@beer.BrandId">Editar</a>
-                    </button>
+                    <a asp-action="Edit" asp-route-id="@beer.BeerId" class="btn btn-warning btn-sm btn-edit">Editar</a>
                 </td>
                 <td>
                     <form asp-action="Delete" asp-route-id="@beer.BeerId" onsubmit="return confirm('¿Está seguro de que desea eliminar esta cerveza?');">

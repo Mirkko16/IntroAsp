@@ -49,40 +49,6 @@ namespace IntroAsp.Controllers
             return View(model);
         }
 
-
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, BeerViewModel model)
-        {
-            if (id != model.BeerId)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                var beer = await _context.Beers.FindAsync(id);
-                if (beer == null)
-                {
-                    return NotFound();
-                }
-
-                beer.Name = model.Name;
-                beer.BrandId = model.BrandId;
-
-                _context.Update(beer);
-                await _context.SaveChangesAsync();
-
-                return RedirectToAction(nameof(Index));
-            }
-
-            ViewData["Brands"] = new SelectList(_context.Brands, "BrandId", "Name", model.BrandId);
-            return View(model);
-        }
-
-
-
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -109,6 +75,42 @@ namespace IntroAsp.Controllers
             _context.Beers.Remove(beer);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var beer = await _context.Brands.FindAsync(id);
+            if (beer == null)
+            {
+                return NotFound();
+            }
+            var model = new BeerViewModel
+            {
+                BeerId = id,
+                Name = beer.Name,
+                BrandId = beer.BrandId
+            };
+            ViewData["Beers"] = new SelectList(_context.Beers, "BeerId", "Name", model.BrandId);
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(BeerViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var beer = await _context.Beers.FindAsync(model.BeerId);
+                if (beer == null)
+                {
+                    return NotFound();
+                }
+                beer.Name = model.Name;
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["Beers"] = new SelectList(_context.Beers, "BeerId", "Name", model.BrandId);
+            return View(model);
         }
     }
 }

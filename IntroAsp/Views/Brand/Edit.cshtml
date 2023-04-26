@@ -1,13 +1,11 @@
-﻿@*Edit de las cervezas*@
+﻿@model IntroAsp.Models.ViewModels.BrandViewModel
 
-@model IntroAsp.Models.ViewModels.BeerViewModel
-
-<h2>Editar Cerveza</h2>
+<h2>Editar Marca</h2>
 
 <form asp-action="Edit" method="post">
     <div class="form-group">
-        <label asp-for="BeerId" class="control-label"></label>
-        <input asp-for="BeerId" class="form-control" readonly="readonly" />
+        <label asp-for="BrandId" class="control-label"></label>
+        <input asp-for="BrandId" class="form-control" readonly="readonly" />
     </div>
     <div class="form-group">
         <label asp-for="Name" class="control-label"></label>
@@ -18,4 +16,3 @@
     </div>
     @Html.AntiForgeryToken()
 </form>
-
